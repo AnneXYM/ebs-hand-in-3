@@ -540,7 +540,14 @@ function vandrum () {
     vand.setPosition(randint(0, 160), randint(0, 120))
     vand.setStayInScreen(true)
     vand.setBounceOnWall(true)
-    vand.setVelocity(50, 50)
+    vand.setVelocity(60, 60)
+    if (vand.overlapsWith(mySprite)) {
+        info.changeScoreBy(1)
+    } else {
+        if (info.score() == 5) {
+            vandspørgsmål()
+        }
+    }
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(img`

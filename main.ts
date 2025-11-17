@@ -339,7 +339,7 @@ function homepage () {
     sovn.sayText("Søvn")
     sovn.setPosition(32, 96)
 }
-function nokvand (num: number) {
+function nokvand () {
     if (mitvand <= 6) {
         nok_vand = true
         story.spriteSayText(mySprite, "uhhh, drik mere vand - stay hydrated! ")
@@ -369,6 +369,7 @@ controller.down.onEvent(ControllerButtonEvent.Released, function () {
         `)
 })
 function vandrum () {
+    nok_vand = false
     scene.setBackgroundImage(img`
         6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
         6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
@@ -492,10 +493,7 @@ function vandrum () {
         6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
         `)
     tiles.setCurrentTilemap(tilemap`level8`)
-    sprites.destroyAllSpritesOfKind(SpriteKind.vand)
-    sprites.destroyAllSpritesOfKind(SpriteKind.humor)
-    sprites.destroyAllSpritesOfKind(SpriteKind.cyklus)
-    sprites.destroyAllSpritesOfKind(SpriteKind.sovn)
+    info.setScore(0)
     mySprite.setPosition(80, 62)
     mySprite.setImage(img`
         . . . . . f f 4 4 f f . . . . . 
@@ -515,7 +513,8 @@ function vandrum () {
         . . . f f 1 d 1 d 1 d f f . . . 
         . . . . . f f b b f f . . . . . 
         `)
-    vand = sprites.create(img`
+    pause(500)
+    Vmad = sprites.create(img`
         .....8888888888.....
         .....8888888888.....
         .......888888.......
@@ -524,7 +523,7 @@ function vandrum () {
         .....dddddddd1d.....
         .....dddddddd1d.....
         .....dddddddd1d.....
-        .....dddddddddd.....
+        .....dddddddd1d.....
         .....9999999919.....
         .....9999999999.....
         .....9999999999.....
@@ -536,19 +535,20 @@ function vandrum () {
         .....9999999999.....
         .....8888888888.....
         ......88888888......
-        `, SpriteKind.vand)
-    vand.setPosition(randint(0, 160), randint(0, 120))
-    vand.setStayInScreen(true)
-    vand.setBounceOnWall(true)
-    vand.setVelocity(60, 60)
-    if (vand.overlapsWith(mySprite)) {
-        info.changeScoreBy(1)
-    } else {
-        if (info.score() == 5) {
-            vandspørgsmål()
-        }
+        `, SpriteKind.Food)
+    Vmad.setVelocity(60, 60)
+    Vmad.setStayInScreen(true)
+    Vmad.setBounceOnWall(true)
+    Vmad.setPosition(randint(0, 160), randint(0, 120))
+    if (info.score() <= 6) {
+        nokvand()
     }
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function () {
+    sprites.destroy(Vmad, effects.bubbles, 200)
+    info.changeScoreBy(1)
+    pause(200)
+})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(img`
         . . . f 4 4 f f f f . . . . . . 
@@ -1036,8 +1036,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.vand, function (sprite) {
     )
     music.play(music.melodyPlayable(music.jumpUp), music.PlaybackMode.InBackground)
     pause(1000)
+    sprites.destroyAllSpritesOfKind(SpriteKind.vand)
+    sprites.destroyAllSpritesOfKind(SpriteKind.humor)
+    sprites.destroyAllSpritesOfKind(SpriteKind.cyklus)
+    sprites.destroyAllSpritesOfKind(SpriteKind.sovn)
     vandrum()
-    pause(5000)
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(img`
@@ -1218,7 +1221,7 @@ function vandspørgsmål () {
     mitvand = game.askForNumber("Hvor mange glas vand har du drukket i dag?", 1)
     story.spriteSayText(mySprite, "Du har drukket " + mitvand + " glas vand!" + "")
     pause(200)
-    nokvand(mitvand)
+    nokvand()
     pause(100)
 }
 function Intro () {
@@ -2585,12 +2588,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.humor, function (sprite) {
     music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.UntilDone)
     pause(5000)
 })
+let Vmad: Sprite = null
+let nok_vand = false
 let mitvand = 0
 let sovn: Sprite = null
 let cyklus: Sprite = null
 let humor: Sprite = null
 let vand: Sprite = null
 let mySprite: Sprite = null
-let nok_vand = false
-nok_vand = false
 homepage()

@@ -48,17 +48,6 @@ namespace myTiles {
 2 . . . . . . . . 2 
 2 2 2 2 2 2 2 2 2 2 
 `, [myTiles.transparency16,myTiles.tile2], TileScale.Sixteen);
-            case "level4":
-            case "level4":return tiles.createTilemap(hex`0a0008000000000000000000000000010200010200010200000304000304000304000000000000000000000000000000000000000000000102000102000102000003040003040003040000000000000000000000`, img`
-. . . . . . . . . . 
-. . . . . . . . . . 
-. . . . . . . . . . 
-. . . . . . . . . . 
-. . . . . . . . . . 
-. . . . . . . . . . 
-. . . . . . . . . . 
-. . . . . . . . . . 
-`, [myTiles.transparency16,sprites.vehicle.roadTurn1,sprites.vehicle.roadTurn2,sprites.vehicle.roadTurn3,sprites.vehicle.roadTurn4], TileScale.Sixteen);
             case "level0":
             case "level5":return tiles.createTilemap(hex`0a0008000000000000000000000000000000000000000000000000030000000003000000000004000000030001000100040003000003010002020000030300030200000200030003000305050505050505050505`, img`
 . . . . . . . . . . 
@@ -100,6 +89,17 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `, [myTiles.transparency16], TileScale.Sixteen);
+            case "level4":
+            case "level4":return tiles.createTilemap(hex`0a0008000000000000000000000000030200000000030200000104000000000104000000000003020000000000000000010400000000000302000000000302000001040000000001040000000000000000000000`, img`
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+`, [myTiles.transparency16,sprites.swamp.swampTile12,sprites.swamp.swampTile8,sprites.swamp.swampTile6,sprites.swamp.swampTile14], TileScale.Sixteen);
         }
         return null;
     })

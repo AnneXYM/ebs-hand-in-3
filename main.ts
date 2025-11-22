@@ -27,7 +27,7 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . f f b b f f . . . . . 
         `)
     animation.runImageAnimation(
-    mySprite,
+    mitvand,
     [img`
         . . . . . f f 4 4 f f . . . . . 
         . . . . f 5 4 5 5 4 5 f . . . . 
@@ -244,7 +244,6 @@ function homepage () {
         `)
     tiles.setCurrentTilemap(tilemap`level4`)
     mySprite.setPosition(80, 62)
-    controller.moveSprite(mySprite, 100, 100)
     mySprite.setStayInScreen(true)
     vand = sprites.create(img`
         .....8888888888.....
@@ -536,13 +535,11 @@ function vandrum () {
         .....8888888888.....
         ......88888888......
         `, SpriteKind.Food)
+    Vmad.setPosition(randint(0, 160), randint(0, 120))
     Vmad.setVelocity(60, 60)
     Vmad.setStayInScreen(true)
     Vmad.setBounceOnWall(true)
     Vmad.setPosition(randint(0, 160), randint(0, 120))
-    if (info.score() <= 6) {
-        nokvand()
-    }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function () {
     sprites.destroy(Vmad, effects.bubbles, 200)
@@ -571,6 +568,40 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     mySprite,
     [img`
+        . . . f 4 4 f f f f . . . . . . 
+        . . f 4 5 5 4 5 f b f f . . . . 
+        . . f 5 5 5 5 4 e 3 3 b f . . . 
+        . . f e 4 4 4 e 3 3 3 3 b f . . 
+        . . f 3 3 3 3 3 3 3 3 3 3 f . . 
+        . f 3 3 e e 3 b e 3 3 3 3 f . . 
+        . f 3 3 e e e f f 3 3 3 3 f . . 
+        . f 3 e e e f b f b b b b f . . 
+        . . f e 4 4 f 1 e b b b b f . . 
+        . . . f 4 4 4 4 f b b b b f f . 
+        . . . f e e e f f f b b b b f . 
+        . . . f d d d e 4 4 f b b f . . 
+        . . . f d d d e 4 4 e f f . . . 
+        . . f b d b d b e e b f . . . . 
+        . . f f 1 d 1 d 1 d f f . . . . 
+        . . . . f f b b f f . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . f 4 4 f f f f . . . . . . 
+        . . f 4 5 5 4 5 f b f f . . . . 
+        . . f 5 5 5 5 4 e 3 3 b f . . . 
+        . . f e 4 4 4 e 3 3 3 3 b f . . 
+        . f 3 3 3 3 3 3 3 3 3 3 3 f . . 
+        . f 3 3 e e 3 b e 3 3 3 3 f . . 
+        . f 3 3 e e e f f 3 3 3 3 f . . 
+        . . f e e e f b f b b b b f f . 
+        . . . e 4 4 f 1 e b b b b b f . 
+        . . . f 4 4 4 4 f b b b b b f . 
+        . . . f d d d e 4 4 b b b f . . 
+        . . . f d d d e 4 4 f f f . . . 
+        . . f d d d b b e e b b f . . . 
+        . . f b d 1 d 1 d d b f . . . . 
+        . . . f f f b b f f f . . . . . 
+        `,img`
         . . . f 4 4 f f f f . . . . . . 
         . . f 4 5 5 4 5 f b f f . . . . 
         . . f 5 5 5 5 4 e 3 3 b f . . . 
@@ -1064,6 +1095,40 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     mySprite,
     [img`
+        . . . . . . f f f f 4 4 f . . . 
+        . . . . f f b f 5 4 5 5 4 f . . 
+        . . . f b 3 3 e 4 5 5 5 5 f . . 
+        . . f b 3 3 3 3 e 4 4 4 e f . . 
+        . . f 3 3 3 3 3 3 3 3 3 3 f . . 
+        . . f 3 3 3 3 e b 3 e e 3 3 f . 
+        . . f 3 3 3 3 f f e e e 3 3 f . 
+        . . f b b b b f b f e e e 3 f . 
+        . . f b b b b e 1 f 4 4 e f . . 
+        . f f b b b b f 4 4 4 4 f . . . 
+        . f b b b b f f f e e e f . . . 
+        . . f b b f 4 4 e d d d f . . . 
+        . . . f f e 4 4 e d d d f . . . 
+        . . . . f b e e b d b d b f . . 
+        . . . . f f d 1 d 1 d 1 f f . . 
+        . . . . . . f f b b f f . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f 4 4 f . . . 
+        . . . . f f b f 5 4 5 5 4 f . . 
+        . . . f b 3 3 e 4 5 5 5 5 f . . 
+        . . f b 3 3 3 3 e 4 4 4 e f . . 
+        . . f 3 3 3 3 3 3 3 3 3 3 3 f . 
+        . . f 3 3 3 3 e b 3 e e 3 3 f . 
+        . . f 3 3 3 3 f f e e e 3 3 f . 
+        . f f b b b b f b f e e e f . . 
+        . f b b b b b e 1 f 4 4 e . . . 
+        . f b b b b b f 4 4 4 4 f . . . 
+        . . f b b b 4 4 e d d d f . . . 
+        . . . f f f 4 4 e d d d f . . . 
+        . . . f b b e e b b d d d f . . 
+        . . . . f b d d 1 d 1 d b f . . 
+        . . . . . f f f b b f f f . . . 
+        `,img`
         . . . . . . f f f f 4 4 f . . . 
         . . . . f f b f 5 4 5 5 4 f . . 
         . . . f b 3 3 e 4 5 5 5 5 f . . 
@@ -2455,7 +2520,7 @@ function Intro () {
         cccccccccccfcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
         `)
     pause(500)
-    story.printText("Dejligt at se dig igen :D", 80, 60)
+    story.printText("Dejligt at se dig :D", 80, 60)
     game.showLongText("Klar? Lad os track din dag!", DialogLayout.Bottom)
     scene.setBackgroundColor(15)
 }
@@ -2590,10 +2655,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.humor, function (sprite) {
 })
 let Vmad: Sprite = null
 let nok_vand = false
-let mitvand = 0
 let sovn: Sprite = null
 let cyklus: Sprite = null
 let humor: Sprite = null
 let vand: Sprite = null
+let mitvand = 0
 let mySprite: Sprite = null
 homepage()
+controller.moveSprite(mySprite, 100, 100)
